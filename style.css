@@ -2,72 +2,73 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(#f4f0ff, #e1e5f2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  overflow-x: hidden;
-}
-
-h1 {
-  color: #5a189a;
-  margin-top: 40px;
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-.container {
+  background-color: #dbeafe; /* bleu pastel */
+  overflow: hidden;
+  position: relative;
   text-align: center;
-  margin-top: 0;
+}
+
+.title {
+  margin-top: 30px;
+  font-size: 2.5rem;
+  color: #1e3a8a; /* bleu navy foncé */
+  font-weight: 700;
+}
+
+.verse {
+  font-size: 1.1rem;
+  color: #374151;
+  margin-top: 10px;
+}
+
+.cake-container {
+  position: relative;
+  margin: 40px auto;
+  width: 250px;
+  height: 180px;
 }
 
 .cake {
-  position: relative;
-  width: 220px;
-  height: 160px;
-  margin: 40px auto;
-  background: #1a1a40;
-  border-radius: 20px 20px 10px 10px;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 10px 20px rgba(0,0,0,0.2);
+  width: 180px;
+  height: 100px;
+  background: #1e3a8a;
+  border-radius: 15px 15px 5px 5px;
+  margin: 0 auto;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
 }
 
-.layer::before {
-  content: "";
+.couple-img {
   position: absolute;
-  top: -10px;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 140px;
+}
+
+.hearts-container {
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
-  height: 15px;
-  background: #2e2e6a;
-  border-radius: 10px 10px 0 0;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
 }
 
-.candles {
+.heart {
   position: absolute;
-  top: -45px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 25px;
+  font-size: 20px;
+  animation: fall 5s linear infinite;
 }
 
-.candle {
-  width: 8px;
-  height: 35px;
-  background: #ffffff;
-  border-radius: 2px;
-  position: relative;
-  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
 }
-
-.flame {
-  position: absolute;
-  top: -18px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 18px;
-  background: radial-gradient(ellipse at center, #ffd700 0%, #ff8c00 70%, transparent 100%);
-  border-radius: 50% 50% 40% 40%;
-  animation: flicker 0.2s infinite a
