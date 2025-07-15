@@ -1,51 +1,74 @@
-let flames = document.querySelectorAll(".flame");
-let loveMessage = document.getElementById("loveMessage");
-
-// --- Fonction pour éteindre les bougies
-function blowCandles() {
-  flames.forEach(flame => flame.style.display = "none");
-  loveMessage.textContent = "💨 Tu as soufflé les bougies... Joyeux 2 mois mon cœur 💕";
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #dbeafe; /* bleu pastel */
+  overflow: hidden;
+  position: relative;
+  text-align: center;
 }
 
-// --- Fonction pour rallumer les bougies
-function relightCandles() {
-  flames.forEach(flame => flame.style.display = "block");
-  loveMessage.textContent = "🕯️ Les bougies sont rallumées. Essaie encore de souffler !";
+.title {
+  margin-top: 30px;
+  font-size: 2.5rem;
+  color: #1e3a8a; /* bleu navy foncé */
+  font-weight: 700;
 }
 
-// --- Détection du micro
-async function startMicDetection() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const mic = audioContext.createMediaStreamSource(stream);
-    const analyser = audioContext.createAnalyser();
-    const dataArray = new Uint8Array(analyser.fftSize);
+.verse {
+  font-size: 1.1rem;
+  color: #374151;
+  margin-top: 10px;
+}
 
-    mic.connect(analyser);
+.cake-container {
+  position: relative;
+  margin: 40px auto;
+  width: 250px;
+  height: 180px;
+}
 
-    function detectBlow() {
-      analyser.getByteTimeDomainData(dataArray);
-      let total = 0;
-      for (let i = 0; i < dataArray.length; i++) {
-        let deviation = dataArray[i] - 128;
-        total += Math.abs(deviation);
-      }
+.cake {
+  width: 180px;
+  height: 100px;
+  background: #1e3a8a;
+  border-radius: 15px 15px 5px 5px;
+  margin: 0 auto;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
 
-      const volume = total / dataArray.length;
-      if (volume > 10) { // seuil de souffle
-        blowCandles();
-      }
+.couple-img {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 140px;
+}
 
-      requestAnimationFrame(detectBlow);
-    }
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
 
-    detectBlow();
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: fall 5s linear infinite;
+}
 
-  } catch (err) {
-    alert("Microphone inaccessible 😢\nAutorise l'accès au micro pour souffler les bougies !");
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
   }
 }
-
-// Lance la détection dès que la page est chargée
-window.addEventListener("load", startMicDetection);
