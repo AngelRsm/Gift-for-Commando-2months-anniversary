@@ -42,4 +42,10 @@ async function startMicDetection() {
 
     detectBlow();
 
+  } catch (err) {
+    alert("Microphone inaccessible 😢\nAutorise l'accès au micro pour souffler les bougies !");
   }
+}
+
+// Lance la détection dès que la page est chargée
+window.addEventListener("load", startMicDetection);
