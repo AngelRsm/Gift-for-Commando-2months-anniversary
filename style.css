@@ -4,127 +4,129 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #dbeafe;
   overflow: hidden;
+  position: relative;
   text-align: center;
 }
 
 .title {
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 2.5rem;
   color: #1e3a8a;
   font-weight: 700;
 }
 
 .verse {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #374151;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .cake-container {
   position: relative;
   margin: 40px auto;
-  width: 300px;
-  height: 300px;
+  width: 260px;
+  height: 240px;
 }
 
 .cake {
   position: relative;
-  width: 200px;
-  height: 100px;
+  width: 220px;
+  height: 140px;
   margin: 0 auto;
+  border-radius: 120px 120px 30px 30px;
   background: #1e3a8a;
-  border-radius: 100px / 30px;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.4), 0 10px 20px rgba(0,0,0,0.2);
+  overflow: visible;
+  z-index: 1;
 }
 
-.layer {
+.bottom-cream {
   position: absolute;
-  width: 200px;
-  height: 25px;
-  left: 0;
-  border-radius: 100px / 20px;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background: #f9f0ff;
+  border-radius: 0 0 120px 120px;
 }
 
-.layer-bottom { top: 75px; background: #0f172a; }
-.layer-middle { top: 50px; background: #1e3a8a; }
-.layer-top { top: 25px; background: #312e81; }
-
-.icing {
+.cake-layer {
   position: absolute;
-  top: 0;
+  bottom: 30px;
+  width: 100%;
+  height: 50px;
+  background: #2d2d8f;
+}
+
+.top-cream {
+  position: absolute;
+  bottom: 80px;
   width: 100%;
   height: 20px;
-  background: #fff;
-  border-radius: 100px / 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  background: #f9f0ff;
+  border-radius: 50%;
 }
 
 .candles {
   position: absolute;
-  top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: -20px;
+  width: 100%;
   display: flex;
-  gap: 40px;
+  justify-content: space-around;
+  padding: 0 20px;
 }
 
 .candle {
-  width: 10px;
-  height: 40px;
-  background: #ffffff;
-  border-radius: 3px;
   position: relative;
+  width: 8px;
+  height: 40px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
 }
 
-.flame {
-  width: 12px;
-  height: 20px;
-  background: radial-gradient(ellipse at center, #ffd700 0%, #ff8c00 70%, transparent 100%);
+.candle::after {
+  content: "";
   position: absolute;
-  top: -20px;
-  left: -1px;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: #333;
+}
+
+.candle .flame {
+  position: absolute;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 16px;
+  background: radial-gradient(circle at 50% 0%, #ffdd55 0%, #ff7000 70%);
   border-radius: 50% 50% 40% 40%;
   animation: flicker 0.2s infinite alternate;
 }
 
 @keyframes flicker {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.2); opacity: 0.8; }
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1.2); opacity: 0.7; }
 }
 
 .couple-img {
   position: absolute;
-  bottom: 70px;
+  bottom: 100px;
   left: 50%;
   transform: translateX(-50%);
-  height: 150px;
+  height: 130px;
   z-index: 2;
-}
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #7b2cbf;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.message {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #1e3a8a;
 }
 
 .hearts-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   pointer-events: none;
+  overflow: hidden;
   z-index: 0;
 }
 
@@ -137,4 +139,25 @@ button {
 @keyframes fall {
   0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
   100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: #7b2cbf;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5a189a;
+}
+
+.message {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #5a189a;
 }
